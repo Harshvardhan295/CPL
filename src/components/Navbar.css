@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'POLYA Regular';
+  src: url('./fonts/POLYA.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.navbarheadtext{
+    font-family: 'POLYA Regular';
+}
