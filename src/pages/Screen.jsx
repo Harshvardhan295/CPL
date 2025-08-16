@@ -5,8 +5,24 @@ import { motion } from "framer-motion";
 import Trail from '../components/TrailText';
 import './Screen.css'
 import cricketShot from '../assets/cricketShot.png';
+import { useNavigate } from 'react-router-dom';
+import loadingGif from '../assets/loading.gif'; 
+
+
+
 const MainBody = () => {
-  const [open, setOpen] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const goToAuction = () => {
+    setLoading(true); // Start loading
+
+    setTimeout(() => {
+      setLoading(false); // Stop loading
+      navigate('/auction'); // Go to Auction page
+    }, 1500); // 1.5 seconds loading
+  };
+
 
   return (
     <div className="relative min-h-screen overflow-hidden h-[15px]">
@@ -46,6 +62,7 @@ const MainBody = () => {
                 className="mb-8 h-[80px] w-[200px] cursor-pointer rounded-[50px] bg-[#00ccff] flex items-center justify-center text-white font-bold"
                 whileHover={{ scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                onClick={goToAuction}
               >
                 Click Me
               </motion.div>
@@ -56,7 +73,14 @@ const MainBody = () => {
         </div>
        
       </div>
+{loading && (
+  <div className="loader-overlay">
+    <img src={loadingGif} alt="Loading..." className="loader-gif" />
+  </div>
+)}
+
     </div>
+      
   );
 };
 
