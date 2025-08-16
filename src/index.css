@@ -8,3 +8,8 @@
   font-weight: normal;
   font-style: normal;
 }
+/* Add this to your global CSS */
+[data-testid="modal"] > div {
+  background: transparent !important; /* remove white bg */
+  box-shadow: none !important;       /* optional */
+}
