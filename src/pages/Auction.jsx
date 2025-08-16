@@ -1,4 +1,4 @@
-import AuctionCardTotal from "../components/AuctionCardTotal"; // Ensure correct file name casing
+import AuctionCardTotal from "../components/AuctionCardTotal.jsx"; // Ensure correct file name casing
 import VantaBackground from "../components/VantaBackground.jsx";
 export default function Auction() {
   return (

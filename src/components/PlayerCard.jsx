@@ -1,7 +1,7 @@
 import React from 'react';
 import './Matrix.css';
 import './PlayerCard.css';
-import TeamCard from './TeamCard'
+import TeamCard from './TeamCard.jsx'
 import './soldbutton.css'
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { GrRevert } from "react-icons/gr";

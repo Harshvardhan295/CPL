@@ -1,5 +1,5 @@
-import AuctionCard from "../components/auctionCard";
-import PlayerCard from "./PlayerCard";
+import AuctionCard from "../components/auctionCard.jsx";
+import PlayerCard from "./PlayerCard.jsx";
 import React from "react";
 
 const AuctionCardTotal = () => {
