@@ -4,32 +4,30 @@ import Squares from '../components/Squares';
 import { motion } from "framer-motion";
 import Trail from '../components/TrailText';
 import './Screen.css'
+import cricketShot from '../assets/cricketShot.png';
 const MainBody = () => {
   const [open, setOpen] = useState(true);
 
   return (
     <div className="relative min-h-screen overflow-hidden h-[15px]">
 
-      {/* Background image */}
       <div
         className="absolute bg-cover bg-center"
         style={{
           backgroundImage: `url(${tennisWallpaper})`,
 
-          height: "calc(100vh)", // fill remaining height
-          width: "100%",          // full width
+          height: "calc(100vh)",
+          width: "100%",        
         }}
       />
 
-
-      {/* Transparent Squares above background */}
       <div className="absolute inset-0 opacity-40 pointer-events-none">
         <Squares
           speed={0.6}
           squareSize={30}
           direction="diagonal"
-          borderColor="rgba(255,255,255,0.5)" // transparent white border
-          hoverFillColor="rgba(255,255,255,0.4)" // transparent fill on hover
+          borderColor="rgba(255,255,255,0.5)"
+          hoverFillColor="rgba(255,255,255,0.4)"
         />
       </div>
 
@@ -38,6 +36,10 @@ const MainBody = () => {
         onClick={() => setOpen(o => !o)}
       >
         <div className='flex'>
+        <div>
+          <img src={cricketShot} className='imageCricket' alt="Cricket Shot" />
+        </div>
+
            <div className='clickmefuncitonbutton'>
 
               <motion.div

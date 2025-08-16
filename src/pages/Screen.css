@@ -1,6 +1,13 @@
 .clickmefuncitonbutton{
     position: absolute;
-    top: 350px;
+    top: 450px;
     right: 280px;
     
+}
+.imageCricket {
+    position: relative;
+    bottom: 75px;
+    left: 300px;
+    height: 450px;
+    transform: scaleX(-1); /* Flips horizontally */
 }

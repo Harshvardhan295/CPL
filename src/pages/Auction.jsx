@@ -1,12 +1,11 @@
-import AuctionCard from "../components/AuctionCard"; // Ensure correct file name casing
+import AuctionCardTotal from "../components/AuctionCardTotal"; // Ensure correct file name casing
 import VantaBackground from "../components/VantaBackground";
-
 export default function Auction() {
   return (
     <div
       style={{
         position: "relative",
-        height: "90.5vh",
+        height: "92.5vh",
         width: "100%",
         overflow: "hidden",
       }}
@@ -37,7 +36,9 @@ export default function Auction() {
           marginLeft: "10px",
         }}
       >
-        <AuctionCard height={500} width={400} />
+        <div className="flex">
+          <AuctionCardTotal />
+        </div>
       </div>
     </div>
   );

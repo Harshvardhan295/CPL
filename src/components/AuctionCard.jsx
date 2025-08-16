@@ -68,7 +68,7 @@ const Gradient = styled(motion.div)`
 export default function AuctionCard({
   height = 400,
   width = 300,
-  imageUrl = "https://images.unsplash.com/photo-1571178109673-2686d60d6cba?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+  imageUrl = "https://i.pinimg.com/736x/c8/15/9a/c8159a22643301a1bf05aa548057e7c3.jpg",
 }) {
   const ref = useRef(null);
   const [hover, setHover] = useState(false);
@@ -118,7 +118,7 @@ export default function AuctionCard({
   }, [hover, centerPoint, xy]);
 
   return (
-    <Container ref={ref} width={width} height={height}>
+    <Container ref={ref} width={width} height={height} className="flex justify-center" >
       <Content
         style={{ rotateX: springX, rotateY: springY }}
         whileHover={{ scale: 1.03 }}
