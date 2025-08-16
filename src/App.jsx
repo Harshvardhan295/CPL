@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Screen from './pages/Screen';
-import Auction from './pages/auction';
+import Navbar from './components/Navbar.jsx';
+import Screen from './pages/Screen.jsx';
+import Auction from './pages/Auction.jsx';
 
 function App() {
   return (

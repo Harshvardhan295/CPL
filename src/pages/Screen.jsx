@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import tennisWallpaper from '../assets/tennisWallpaper.jpg';
-import Squares from '../components/Squares';
+import Squares from '../components/Squares.jsx';
 import { motion } from "framer-motion";
 import Trail from '../components/TrailText';
 import './Screen.css'
