@@ -34,7 +34,7 @@ const Auction = () => {
           const formattedPlayers = data.map((row) => ({
             // Correctly mapping to the columns from your sheet
             id: row[0] || 'N/A',                 // Column C: Email Address
-            name: row[1] || 'Unknown Player',    // Column D: Full Name
+            name: row[0] || 'Unknown Player',    // Column D: Full Name
             priority: row[5] || '-',             // Column H: Priority for Auction
             imageUrl: row[6] || '',              // Column I: Profile Image URL
             performance: row[7] || 'N/A',        // Column J: Rate Your Performance
