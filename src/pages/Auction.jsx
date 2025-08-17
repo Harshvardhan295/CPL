@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PlayerCard from '../components/PlayerCard.jsx';
 import TeamCard from '../components/TeamCard.jsx';
+import VantaBackground from '../components/VantaBackground.jsx';
 
 const Auction = () => {
   const [players, setPlayers] = useState([]);
@@ -32,20 +33,19 @@ const Auction = () => {
         }).then((response) => {
           const data = response.result.values || [];
           const formattedPlayers = data.map((row) => ({
-            // Correctly mapping to the columns from your sheet
-            id: row[0] || 'N/A',                 // Column C: Email Address
-            name: row[1] || 'Unknown Player',    // Column D: Full Name
-            priority: row[6] || '-',             // Column H: Priority for Auction
-            imageUrl: row[7] || '',              // Column I: Profile Image URL
-            performance: row[8] || 'N/A',        // Column J: Rate Your Performance
+            id: row[0] || 'N/A',
+            name: row[1] || 'Unknown Player',    // Correctly maps to Full Name (Column D)
+            priority: row[6] || '-',
+            imageUrl: row[7] || '',
+            performance: row[8] || 'N/A',
           }));
           if (formattedPlayers.length === 0) {
-              setApiError("No players found. Please check the sheet name and range in the .env file.");
+              setApiError("No players found. Check sheet name and range in .env file.");
           }
           setPlayers(formattedPlayers);
         }).catch(err => {
             console.error("Error fetching sheet data: ", err.result.error.message);
-            setApiError(`Failed to fetch data: ${err.result.error.message}. Check Sheet Name, API Key, and Sharing settings.`);
+            setApiError(`Failed to fetch data: ${err.result.error.message}. Check Sheet Name & Sharing settings.`);
         });
       }).catch(err => {
           console.error("Error initializing GAPI client: ", err);
@@ -77,7 +77,7 @@ const Auction = () => {
       setCurrentBid(newBid);
       setLastBidder(teamName);
     } else {
-      alert(`${teamName} does not have enough purse to place this bid.`);
+      alert(`${teamName} does not have enough purse for this bid.`);
     }
   };
 
@@ -120,11 +120,14 @@ const Auction = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black">
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center pt-10">
+    <div className="relative min-h-screen w-full overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full z-0">
+            <VantaBackground />
+        </div>
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center pt-10 pb-10">
         {apiError ? (
-            <div className="text-red-500 text-2xl bg-white/10 p-8 rounded-lg">
-                <p>Error:</p>
+            <div className="text-red-500 text-2xl bg-black/50 p-8 rounded-lg">
+                <p className="font-bold text-3xl mb-4">API Error</p>
                 <p>{apiError}</p>
             </div>
         ) : auctionFinished ? (
@@ -141,7 +144,7 @@ const Auction = () => {
         ) : (
           <p className="text-white text-2xl">Loading players from Google Sheet...</p>
         )}
-        <div className="flex flex-wrap justify-center mt-8">
+        <div className="flex flex-wrap justify-center items-center mt-8 gap-x-20 gap-y-4 px-4">
           {Object.keys(teams).map((teamName) => (
             <TeamCard
               key={teamName}
