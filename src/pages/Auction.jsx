@@ -5,6 +5,7 @@ import TeamCard from '../components/TeamCard.jsx';
 const Auction = () => {
   const [players, setPlayers] = useState([]);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+  const [apiError, setApiError] = useState(null);
   const [teams, setTeams] = useState({
     RCB: { purse: 10000000, players: [] },
     MI: { purse: 10000000, players: [] },
@@ -21,39 +22,56 @@ const Auction = () => {
 
   useEffect(() => {
     const initClient = () => {
-      // Access gapi from the window object
       window.gapi.client.init({
         apiKey: import.meta.env.VITE_CPL_AUCTION_APP,
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
       }).then(() => {
         window.gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId: import.meta.env.VITE_SPREADSHEET_ID,
-          range: 'Sheet1!A2:C',
+          range: import.meta.env.VITE_SHEET_RANGE,
         }).then((response) => {
           const data = response.result.values || [];
           const formattedPlayers = data.map((row) => ({
-            id: row[0],
-            name: row[1],
-            stats: row[2],
+            // Correctly mapping to the columns from your sheet
+            id: row[0] || 'N/A',                 // Column C: Email Address
+            name: row[1] || 'Unknown Player',    // Column D: Full Name
+            priority: row[5] || '-',             // Column H: Priority for Auction
+            imageUrl: row[6] || '',              // Column I: Profile Image URL
+            performance: row[7] || 'N/A',        // Column J: Rate Your Performance
           }));
+          if (formattedPlayers.length === 0) {
+              setApiError("No players found. Please check the sheet name and range in the .env file.");
+          }
           setPlayers(formattedPlayers);
-        }).catch(err => console.error("Error fetching sheet data: ", err));
-      }).catch(err => console.error("Error initializing GAPI client: ", err));
+        }).catch(err => {
+            console.error("Error fetching sheet data: ", err.result.error.message);
+            setApiError(`Failed to fetch data: ${err.result.error.message}. Check Sheet Name, API Key, and Sharing settings.`);
+        });
+      }).catch(err => {
+          console.error("Error initializing GAPI client: ", err);
+          setApiError("Failed to initialize Google API. Check your API Key.");
+      });
     };
-    // Access gapi from the window object
-    window.gapi.load('client:auth2', initClient);
+    if (window.gapi) {
+        window.gapi.load('client:auth2', initClient);
+    } else {
+        setApiError("Google API script not loaded. Check internet connection and index.html.");
+    }
   }, []);
 
   const handleBid = (teamName) => {
+    if (auctionFinished) return;
     let increment = 50000;
-    if (currentBid >= 300000 && currentBid < 800000) {
-      increment = 100000;
-    } else if (currentBid >= 800000) {
+    if (currentBid >= 800000) {
       increment = 200000;
+    } else if (currentBid >= 300000) {
+      increment = 100000;
     }
-
     const newBid = currentBid + increment;
-
+    if (newBid > 10000000) {
+        alert("Bid cannot exceed 1 crore.");
+        return;
+    }
     if (teams[teamName].purse >= newBid) {
       setBidHistory([...bidHistory, { team: lastBidder, amount: currentBid }]);
       setCurrentBid(newBid);
@@ -78,7 +96,6 @@ const Auction = () => {
       newTeams[lastBidder].purse -= currentBid;
       newTeams[lastBidder].players.push(players[currentPlayerIndex]);
       setTeams(newTeams);
-
       if (currentPlayerIndex < players.length - 1) {
         setCurrentPlayerIndex(currentPlayerIndex + 1);
         setCurrentBid(100000);
@@ -103,12 +120,15 @@ const Auction = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 bg-black">
-      </div>
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center">
-        {auctionFinished ? (
-          <div className="text-white text-5xl">Auction Finished!</div>
+    <div className="relative min-h-screen overflow-hidden bg-black">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center pt-10">
+        {apiError ? (
+            <div className="text-red-500 text-2xl bg-white/10 p-8 rounded-lg">
+                <p>Error:</p>
+                <p>{apiError}</p>
+            </div>
+        ) : auctionFinished ? (
+          <div className="text-white text-5xl font-bold">Auction Finished!</div>
         ) : players.length > 0 ? (
           <PlayerCard
             player={players[currentPlayerIndex]}
@@ -119,14 +139,14 @@ const Auction = () => {
             onPrev={handlePrevPlayer}
           />
         ) : (
-          <p className="text-white text-2xl">Loading players...</p>
+          <p className="text-white text-2xl">Loading players from Google Sheet...</p>
         )}
-        <div className="flex justify-center mt-8">
+        <div className="flex flex-wrap justify-center mt-8">
           {Object.keys(teams).map((teamName) => (
             <TeamCard
               key={teamName}
               teamName={teamName}
-              logo={`src/assets/${teamName.toLowerCase()}.png`}
+              logo={`/src/assets/${teamName.toLowerCase()}.png`}
               onBid={() => handleBid(teamName)}
               players={teams[teamName].players}
               purse={teams[teamName].purse}

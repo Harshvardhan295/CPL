@@ -2,6 +2,7 @@ import React from 'react';
 import './PlayerCard.css';
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { GrRevert } from "react-icons/gr";
+import defaultPlayerIcon from '../assets/default-player.jpg'; // Using cricketShot as a default image
 
 // Helper to format currency
 const formatCurrency = (amount) => {
@@ -12,62 +13,74 @@ const formatCurrency = (amount) => {
 };
 
 const PlayerCard = ({ player, currentBid, onUndo, onSold, onNext, onPrev }) => {
-  // Display a loading state if player data hasn't arrived yet
   if (!player) {
     return (
-      <div className="text-5xl text-white h-[500px] w-[900px] bg-white/20 backdrop-blur-lg border border-white/30 rounded-xl p-5 flex items-center justify-center">
+      <div className="text-5xl text-white h-[400px] w-[900px] bg-white/20 backdrop-blur-lg border border-white/30 rounded-xl p-5 flex items-center justify-center">
         Loading Player...
       </div>
     );
   }
 
-  const nameParts = player.name ? player.name.split(' ') : ['Player', 'Name'];
-  const firstName = nameParts[0];
-  const lastName = nameParts.slice(1).join(' ');
-
   return (
-    <div className="text-5xl text-white h-[500px] w-[900px] 
+    <div className="text-white h-[400px] w-[900px] 
       bg-white/20 backdrop-blur-lg 
       border border-white/30 rounded-xl 
-      shadow-[0_0_40px_rgba(255,255,255,0.3),0_0_80px_rgba(173,216,230,0.4)] p-5
-      flex flex-col justify-between">
+      shadow-[0_0_40px_rgba(255,255,255,0.3),0_0_80px_rgba(173,216,230,0.4)] p-8
+      flex items-center justify-between space-x-8">
 
-      {/* Player Info */}
-      <div className="flex w-full items-center text-center">
-        <div className="cursor-pointer" onClick={onPrev}>
-          <button className="shadow-[inset_0_0_0_2px_#616467] text-black p-4 rounded-full bg-transparent hover:bg-[#616467] hover:text-white dark:text-neutral-200 transition duration-200">
-            <SlArrowLeft size={28} />
-          </button>
+      {/* Backward Button */}
+      <div className="cursor-pointer" onClick={onPrev}>
+        <button className="shadow-[inset_0_0_0_2px_#616467] text-white p-4 rounded-full bg-transparent hover:bg-[#616467] transition duration-200">
+          <SlArrowLeft size={28} />
+        </button>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex items-center space-x-8 flex-grow">
+        {/* Left Side: Player Image */}
+        <div className="flex-shrink-0">
+          <img 
+            src={player.imageUrl || defaultPlayerIcon} 
+            alt={player.name}
+            className="w-56 h-56 rounded-full object-cover border-4 border-cyan-400 shadow-lg"
+            onError={(e) => { e.target.onerror = null; e.target.src = defaultPlayerIcon; }}
+          />
         </div>
 
-        <div className="nameInBox flex flex-col items-center justify-center flex-1">
-          <div className="firstName font-custom text-center">{firstName} <b>{lastName}</b></div>
-          <div className="preference font-custom flex text-center">{player.stats}</div>
-        </div>
+        {/* Right Side: Player Details and Bidding */}
+        <div className="flex flex-col flex-grow h-full justify-between text-left">
+          <div>
+            <div className="text-6xl font-bold font-custom tracking-wider">{player.name}</div>
+            <div className="text-2xl mt-4 space-y-2">
+              <p><strong>Priority:</strong> {player.priority}</p>
+              <p className="flex items-center"><strong>Performance:</strong> <span className="text-yellow-400 text-3xl ml-2">{player.performance}</span></p>
+            </div>
+          </div>
+          
+          <div className='font-custom flex items-center justify-start space-x-4'>
+            <div className="text-4xl shadow-[inset_0_0_0_2px_#616467] text-white px-6 py-2 rounded-full tracking-widest uppercase bg-transparent">
+              {formatCurrency(currentBid)}
+            </div>
+            
+            <button 
+              onClick={onSold}
+              className="text-3xl shadow-[inset_0_0_0_2px_#616467] text-white px-6 py-2 rounded-full tracking-widest uppercase bg-transparent hover:bg-green-500 transition duration-200">
+              Sold
+            </button>
 
-        <div className="cursor-pointer" onClick={onNext}>
-          <button className="shadow-[inset_0_0_0_2px_#616467] text-black p-4 rounded-full bg-transparent hover:bg-[#616467] hover:text-white dark:text-neutral-200 transition duration-200">
-            <SlArrowRight size={28} />
-          </button>
+            <button 
+              onClick={onUndo}
+              className="shadow-[inset_0_0_0_2px_#616467] text-white p-4 rounded-full tracking-widest uppercase bg-transparent hover:bg-[#616467] transition duration-200">
+              <GrRevert size={24}/>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Bidding Controls */}
-      <div className='font-custom text-center p-1 flex items-center justify-evenly'>
-        <div className="text-4xl shadow-[inset_0_0_0_2px_#616467] text-black px-6 m-2 py-2 rounded-full tracking-widest uppercase bg-transparent">
-          {formatCurrency(currentBid)}
-        </div>
-        
-        <button 
-          onClick={onSold}
-          className="text-3xl shadow-[inset_0_0_0_2px_#616467] text-black px-4 py-2 rounded-full tracking-widest uppercase bg-transparent hover:bg-green-500 hover:text-white dark:text-neutral-200 transition duration-200">
-          Sold
-        </button>
-
-        <button 
-          onClick={onUndo}
-          className="shadow-[inset_0_0_0_2px_#616467] text-black ml-2 px-3 py-3 rounded-full tracking-widest uppercase bg-transparent hover:bg-[#616467] hover:text-white dark:text-neutral-200 transition duration-200">
-          <GrRevert size={24}/>
+      {/* Forward Button */}
+      <div className="cursor-pointer" onClick={onNext}>
+        <button className="shadow-[inset_0_0_0_2px_#616467] text-white p-4 rounded-full bg-transparent hover:bg-[#616467] transition duration-200">
+          <SlArrowRight size={28} />
         </button>
       </div>
     </div>

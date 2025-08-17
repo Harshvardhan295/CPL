@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'POLYA Regular';
-  src: url('./fonts/POLYA.otf') format('opentype');
+  /* Corrected path from components folder up to src, then down to fonts */
+  src: url('../fonts/POLYA.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
