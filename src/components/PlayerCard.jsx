@@ -1,4 +1,5 @@
 import React from 'react';
+import './PlayerCard.css';
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { GrRevert } from "react-icons/gr";
 
@@ -11,6 +12,7 @@ const formatCurrency = (amount) => {
 };
 
 const PlayerCard = ({ player, currentBid, onUndo, onSold, onNext, onPrev }) => {
+  // Display a loading state if player data hasn't arrived yet
   if (!player) {
     return (
       <div className="text-5xl text-white h-[500px] w-[900px] bg-white/20 backdrop-blur-lg border border-white/30 rounded-xl p-5 flex items-center justify-center">
@@ -19,8 +21,7 @@ const PlayerCard = ({ player, currentBid, onUndo, onSold, onNext, onPrev }) => {
     );
   }
 
-  // Split name for styling if desired
-  const nameParts = player.name.split(' ');
+  const nameParts = player.name ? player.name.split(' ') : ['Player', 'Name'];
   const firstName = nameParts[0];
   const lastName = nameParts.slice(1).join(' ');
 
@@ -40,8 +41,8 @@ const PlayerCard = ({ player, currentBid, onUndo, onSold, onNext, onPrev }) => {
         </div>
 
         <div className="nameInBox flex flex-col items-center justify-center flex-1">
-          <div className="text-6xl font-bold">{firstName} <span className="font-light">{lastName}</span></div>
-          <div className="text-3xl mt-2">{player.stats}</div>
+          <div className="firstName font-custom text-center">{firstName} <b>{lastName}</b></div>
+          <div className="preference font-custom flex text-center">{player.stats}</div>
         </div>
 
         <div className="cursor-pointer" onClick={onNext}>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import gapi from 'gapi-script';
 import PlayerCard from '../components/PlayerCard.jsx';
 import TeamCard from '../components/TeamCard.jsx';
 
@@ -22,13 +21,14 @@ const Auction = () => {
 
   useEffect(() => {
     const initClient = () => {
-      gapi.client.init({
-        apiKey: import.meta.env.VITE_CPL_AUCTION_APP, // Use env variable
+      // Access gapi from the window object
+      window.gapi.client.init({
+        apiKey: import.meta.env.VITE_CPL_AUCTION_APP,
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
       }).then(() => {
-        gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: import.meta.env.VITE_SPREADSHEET_ID, // Use env variable
-          range: 'Sheet1!A2:C', // Make sure your sheet name is correct
+        window.gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: import.meta.env.VITE_SPREADSHEET_ID,
+          range: 'Sheet1!A2:C',
         }).then((response) => {
           const data = response.result.values || [];
           const formattedPlayers = data.map((row) => ({
@@ -37,10 +37,11 @@ const Auction = () => {
             stats: row[2],
           }));
           setPlayers(formattedPlayers);
-        }).catch(err => console.error("Error fetching sheet data: ", err)); // Added error handling
-      }).catch(err => console.error("Error initializing GAPI client: ", err)); // Added error handling
+        }).catch(err => console.error("Error fetching sheet data: ", err));
+      }).catch(err => console.error("Error initializing GAPI client: ", err));
     };
-    gapi.load('client:auth2', initClient);
+    // Access gapi from the window object
+    window.gapi.load('client:auth2', initClient);
   }, []);
 
   const handleBid = (teamName) => {
@@ -100,7 +101,6 @@ const Auction = () => {
       setCurrentPlayerIndex(currentPlayerIndex - 1);
     }
   };
-
 
   return (
     <div className="relative min-h-screen overflow-hidden">
