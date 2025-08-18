@@ -6,9 +6,9 @@ import defaultPlayerIcon from '../assets/default-player.jpg';
 
 const formatCurrency = (amount) => {
   if (amount >= 10000000) {
-    return `${(amount / 10000000).toFixed(2)} Cr`;
+    return `${(amount / 10000000).toFixed(2)}\u00A0Cr`;
   }
-  return `${(amount / 100000).toFixed(1)} L`;
+  return `${(amount / 100000).toFixed(1)}\u00A0L`;
 };
 
 const PlayerCard = ({ player, currentBid, onUndo, onSold, onNext, onPrev }) => {

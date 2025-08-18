@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Rohit Sharma",
+    "role": "Batsman",
+    "rating": "⭐⭐⭐⭐⭐",
+    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
+    "base_price": "1L"
+  },
+  {
+    "id": 2,
+    "name": "Jasprit Bumrah",
+    "role": "Bowler",
+    "rating": "⭐⭐⭐⭐⭐",
+    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
+    "base_price": "1L"
+  },
+  {
+    "id": 3,
+    "name": "Hardik Pandya",
+    "role": "All-Rounder",
+    "rating": "⭐⭐⭐⭐",
+    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
+    "base_price": "1L"
+  },
+  {
+    "id": 4,
+    "name": "Rishabh Pant",
+    "role": "Wicket-Keeper",
+    "rating": "⭐⭐⭐⭐",
+    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
+    "base_price": "1L"
+  },
+  {
+    "id": 5,
+    "name": "Shubman Gill",
+    "role": "Batsman",
+    "rating": "⭐⭐⭐⭐",
+    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
+    "base_price": "1L"
+  }
+]
