@@ -2,7 +2,7 @@ import React from 'react';
 import './PlayerCard.css';
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { GrRevert } from "react-icons/gr";
-import defaultPlayerIcon from '../assets/default-player.jpg';
+import defaultPlayerIcon from '../assets/default-player.png';
 import { useAuction } from '../context/AuctionContext.jsx';
 
 const formatCurrency = (amount) => {

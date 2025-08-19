@@ -1,50 +1,514 @@
 [
-  {
-    "id": 1,
-    "name": "Rohit Sharma",
-    "role": "Batsman",
-    "rating": "⭐⭐⭐⭐⭐",
-    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
-    "base_price": "1L"
-  },
-  {
-    "id": 2,
-    "name": "Jasprit Bumrah",
-    "role": "Bowler",
-    "rating": "⭐⭐⭐⭐⭐",
-    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
-    "base_price": "1L"
-  },
-  {
-    "id": 3,
-    "name": "Hardik Pandya",
-    "role": "All-Rounder",
-    "rating": "⭐⭐⭐⭐",
-    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
-    "base_price": "1L"
-  },
-  {
-    "id": 4,
-    "name": "Rishabh Pant",
-    "role": "Wicket-Keeper",
-    "rating": "⭐⭐⭐⭐",
-    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
-    "base_price": "1L"
-  },
-  {
-    "id": 5,
-    "name": "Shubman Gill",
-    "role": "Batsman",
-    "rating": "⭐⭐⭐⭐",
-    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
-    "base_price": "1L"
-  },
-  {
-    "id": 6,
-    "name": "Harry Chouhan",
-    "role": "Batsman",
-    "rating": "⭐⭐⭐⭐",
-    "img": "https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww",
-    "base_price": "1L"
-  }
+    {
+        "id": 1,
+        "name": "Agam Bafna",
+        "role": "Batsman",
+        "rating": "⭐⭐",
+        "img": "player/AgamBafna.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 2,
+        "name": "Aman Pathak",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/AmanPathak.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 3,
+        "name": "Amogh Jawanjal",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/AmoghJawanjal.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 4,
+        "name": "Aniruddha balsaraf",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/AniruddhaBalsaraf.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 5,
+        "name": "Aryan Sahu",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/AryanSahu.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 6,
+        "name": "Atharv Katre",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐",
+        "img": "player/AtharvKatre.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 7,
+        "name": "Atharva Jawale",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/AtharvaJawale.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 8,
+        "name": "Atharva Yadav",
+        "role": "Bowler",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/AtharvaYadav.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 9,
+        "name": "Aum Vishwakarma",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/AumVishwakarma.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 10,
+        "name": "Ayan Javeri",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/AyanJaveri.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 11,
+        "name": "Bhavishya Agrawal",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/BhavishyaAgrawal.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 12,
+        "name": "Chirag Chiraniya",
+        "role": "Batsman",
+        "rating": "⭐⭐",
+        "img": "player/ChiragChiraniya.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 13,
+        "name": "Dev Goyal",
+        "role": "Bowler",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/DevGoyal.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 14,
+        "name": "Dhanay shah",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/DhanayShah.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 15,
+        "name": "Divyansh Sharma",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/DivyanshSharma.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 16,
+        "name": "Harsh khadilkar",
+        "role": "Batsman",
+        "rating": "⭐⭐",
+        "img": "player/HarshKhadilkar.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 17,
+        "name": "Harshit Raj",
+        "role": "Bowler",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/HarshitRaj.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 18,
+        "name": "Kartik Gavhane",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/KartikGavhane.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 19,
+        "name": "Keerthiwant Belorkar",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/KeerthiwantBelorkar.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 20,
+        "name": "Kishan Bhattad",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/KishanBhattad.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 21,
+        "name": "Kunj Rathi",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/KunjRathi.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 22,
+        "name": "MITUL AGRAWAL",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/MitulAgrawal.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 23,
+        "name": "Mohit Gupta",
+        "role": "All-rounder",
+        "rating": "⭐⭐",
+        "img": "player/MohitGupta.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 24,
+        "name": "Nikunj Jaiswal",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/NikunjJaiswal.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 25,
+        "name": "Niraj Musale",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/NirajMusale.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 26,
+        "name": "Om Gupta",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐",
+        "img": "player/OmGupta.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 27,
+        "name": "Omsai Gagare",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐",
+        "img": "player/OmsaiGagare.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 28,
+        "name": "RUSHIL CHANDAK",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/RushilChandak.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 29,
+        "name": "Rishi Pathak",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/RishiPathak.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 30,
+        "name": "Rishi Sharma",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/RishiSharma.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 31,
+        "name": "Samaksh gandhi",
+        "role": "All-rounder",
+        "rating": "⭐⭐",
+        "img": "player/SamakshGandhi.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 32,
+        "name": "Sarvagya Patni",
+        "role": "All-rounder",
+        "rating": "⭐⭐",
+        "img": "player/SarvagyaPatni.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 33,
+        "name": "Soham Agrawal",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/SohamAgrawal.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 34,
+        "name": "SURYAM SUNEJA",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/SuryamSuneja.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 35,
+        "name": "Uddhav bajaj",
+        "role": "Bowler",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/UddhavBajaj.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 36,
+        "name": "Ved Darvaikar",
+        "role": "Bowler",
+        "rating": "⭐⭐⭐",
+        "img": "player/VedDarvaikar.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 37,
+        "name": "Yug Bhattad",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/YugBhattad.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 38,
+        "name": "Abishak Jagotra",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/AbishakJagotra.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 39,
+        "name": "Aditya Bharde",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/AdityaBharde.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 40,
+        "name": "Anirudh sandel",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/AnirudhSandel.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 41,
+        "name": "Ansh Dogra",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/AnshDogra.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 42,
+        "name": "Aryan Gupta",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/AryanGupta.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 43,
+        "name": "Atharv Lavane",
+        "role": "Bowler",
+        "rating": "⭐⭐⭐",
+        "img": "player/AtharvLavane.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 44,
+        "name": "Jay Agrawal",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/JayAgrawal.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 45,
+        "name": "Keshav Gupta",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/KeshavGupta.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 46,
+        "name": "Krishna shonka",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/KrishnaShonka.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 47,
+        "name": "Meet Agarwal",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/MeetAgarwal.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 48,
+        "name": "Nehant Sawarkar",
+        "role": "Bowler",
+        "rating": "⭐⭐⭐",
+        "img": "player/NehantSawarkar.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 49,
+        "name": "Om Gawali",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/OmGawali.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 50,
+        "name": "Paras Bhongade",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/ParasBhongade.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 51,
+        "name": "Prathamesh Lahoti",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/PrathameshLahoti.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 52,
+        "name": "Rajveer Singh",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/RajveerSingh.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 53,
+        "name": "Ram Chandak",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/RamChandak.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 54,
+        "name": "Rohan Dewalkar",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/RohanDewalkar.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 55,
+        "name": "Roopam Dhaddha",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/RoopamDhaddha.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 56,
+        "name": "Rushikesh Batkamwar",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/RushikeshBatkamwar.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 57,
+        "name": "SWAPNIL TALLOO",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/SwapnilTalloo.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 58,
+        "name": "Shantanu Lacchhode",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/ShantanuLacchhode.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 59,
+        "name": "Sujal Singh",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/SujalSingh.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 60,
+        "name": "Tanishq Maheshwari",
+        "role": "Bowler",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/TanishqMaheshwari.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 61,
+        "name": "Tekchand Husukale",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/TekchandHusukale.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 62,
+        "name": "Tushar Sharma",
+        "role": "Batsman",
+        "rating": "⭐⭐⭐⭐⭐",
+        "img": "player/TusharSharma.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 63,
+        "name": "Vardhan Ingole",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/VardhanIngole.jpg",
+        "base_price": "1 Lakh"
+    },
+    {
+        "id": 64,
+        "name": "Vishal Asati",
+        "role": "All-rounder",
+        "rating": "⭐⭐⭐⭐",
+        "img": "player/VishalAsati.jpg",
+        "base_price": "1 Lakh"
+    }
 ]
