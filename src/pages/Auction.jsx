@@ -3,25 +3,28 @@ import PlayerCard from "../components/PlayerCard.jsx";
 import TeamCard from "../components/TeamCard.jsx";
 import VantaBackground from "../components/VantaBackground.jsx";
 import { useAuction } from '../context/AuctionContext.jsx';
+import loadingGif from '../assets/loading.gif'; // Import the loading GIF
 
 const Auction = () => {
-  // 1. Get the new handleResetAuction function from the context
-  const { teams, players, auctionFinished, handleResetAuction } = useAuction();
+  // Get all loading states from the context
+  const { teams, players, auctionFinished, handleResetAuction, loading, isSelling, isResetting } = useAuction();
 
-  // Safety check
-  if (!players || !teams) {
-    return <div className="text-white text-2xl">Loading Auction...</div>;
-  }
+  // Determine if any loading action is in progress
+  const showLoader = loading || isSelling || isResetting;
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
+      {/* Conditionally render the single, simple loading overlay */}
+      {showLoader && (
+        <div className="loader-overlay">
+          <img src={loadingGif} alt="Loading..." className="loader-gif" />
+        </div>
+      )}
+
       <div className="absolute top-0 left-0 w-full h-full z-0">
         <VantaBackground />
       </div>
-
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center pt-10 pb-10">
-        
-        {/* --- UPDATED: Auction Finished Screen --- */}
         {auctionFinished ? (
           <div className="text-center">
             <h1 className="text-white text-5xl font-bold mb-8">Auction Finished!</h1>
@@ -35,11 +38,10 @@ const Auction = () => {
         ) : players.length > 0 ? (
           <PlayerCard />
         ) : (
-          <p className="text-white text-2xl">No players found.</p>
+          // Only show this if not in the initial loading state
+          !loading && <p className="text-white text-2xl">No players found on the server.</p>
         )}
-        {/* --- END UPDATE --- */}
-
-        <div className="flex flex-wrap justify-center items-center mt-8 gap-x-20 gap-y-4 px-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4 mt-8 px-4">
           {Object.keys(teams).map((teamShortName) => (
             <TeamCard
               key={teamShortName}

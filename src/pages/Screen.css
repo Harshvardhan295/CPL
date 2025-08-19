@@ -1,13 +1,13 @@
-.clickmefuncitonbutton{
-    position: absolute;
-    top: 450px;
-    right: 280px;
-    
-}
+/* This file is for the Home.jsx component */
+
 .imageCricket {
-    position: relative;
-    bottom: 75px;
-    left: 300px;
-    height: 450px;
-    transform: scaleX(-1); /* Flips horizontally */
+    transform: scaleX(-1); /* Flips the image horizontally */
+}
+
+/* On smaller screens (mobile), add some top margin to the image */
+@media (max-width: 768px) {
+  .imageCricket {
+    margin-top: 2rem;
+    width: 80%;
+  }
 }

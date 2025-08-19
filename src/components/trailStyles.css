@@ -1,23 +1,31 @@
 .trail-container {
-  position: absolute; 
-  top: 0;
-  left: 0;
-  margin-top: -70px;
+  position: relative; 
   width: 100%;
-  height: 100%;
+  bottom: 120px;
   pointer-events: none; 
-  z-index: 1;
   color: white;
-  font-size:130px;
+  font-size: clamp(2.5rem, 10vw, 130px);
   font-weight: 900;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .trail-text {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-margin-left: 50px;
+  /* KEY FIX: Removed the border that was causing lines to appear on the text */
   margin-top: 40px;
   letter-spacing: 5px;
+}
 
-
+@media (max-width: 768px) {
+  .trail-container {
+    align-items: center;
+    text-align: center;
+    margin-top: 2rem;
+      bottom: 1.5em;
+  }
+  .trail-text {
+    margin-left: 0;
+  }
 }

@@ -5,18 +5,18 @@ const AuctionContext = createContext();
 export const AuctionProvider = ({ children }) => {
   const [players, setPlayers] = useState([]);
   const [teams, setTeams] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // For initial page load
+  const [isSelling, setIsSelling] = useState(false); // For when a player is sold
+  const [isResetting, setIsResetting] = useState(false); // For when the auction is reset
+  const [justSoldToTeam, setJustSoldToTeam] = useState(null); // State for the glow effect
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [currentBid, setCurrentBid] = useState(100000);
   const [lastBidder, setLastBidder] = useState(null);
   const [bidHistory, setBidHistory] = useState([]);
   const [auctionFinished, setAuctionFinished] = useState(false);
 
-  // --- REUSABLE DATA FETCHING FUNCTION ---
-  // We've moved the fetch logic into its own function so we can reuse it.
   const fetchAuctionData = async () => {
     try {
-      setLoading(true);
       const response = await fetch('http://localhost:8000/api/auction');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -26,17 +26,18 @@ export const AuctionProvider = ({ children }) => {
       setTeams(data.teams);
     } catch (error) {
       console.error("Failed to fetch auction data:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
-  // This effect runs once when the app loads to get the initial data
   useEffect(() => {
-    fetchAuctionData();
+    const initialLoad = async () => {
+      setLoading(true);
+      await fetchAuctionData();
+      setLoading(false);
+    };
+    initialLoad();
   }, []);
 
-  // --- HANDLER FUNCTIONS ---
   const getNextBid = (bid) => {
     if (bid < 300000) return bid + 50000;
     if (bid < 1000000) return bid + 100000;
@@ -63,14 +64,14 @@ export const AuctionProvider = ({ children }) => {
     setBidHistory(prev => prev.slice(0, -1));
   };
 
-  // --- THIS IS THE CORRECTED 'handleSold' FUNCTION ---
   const handleSold = async () => {
     if (!lastBidder || players[currentPlayerIndex]?.isSold) return;
-
     const soldPlayer = players[currentPlayerIndex];
     
+    setIsSelling(true);
+    setJustSoldToTeam(lastBidder); // Trigger glow immediately
+
     try {
-      // 1. Tell the server to sell the player.
       const response = await fetch('http://localhost:8000/api/auction/sell', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
@@ -80,18 +81,20 @@ export const AuctionProvider = ({ children }) => {
           soldPrice: currentBid,
         }),
       });
+      if (!response.ok) throw new Error('Failed to save sale to the database');
 
-      if (!response.ok) {
-        throw new Error('Failed to save sale to the database');
-      }
-      
-      // 2. IMPORTANT: Instead of guessing the new state, we ask the server for the
-      //    fresh, authoritative data by calling our fetch function again.
-      await fetchAuctionData();
+      // Wait for 2 seconds to show loader and glow effect
+      setTimeout(async () => {
+        await fetchAuctionData();
+        setIsSelling(false);
+        setJustSoldToTeam(null);
+      }, 200);
 
     } catch (error) {
       console.error("Error selling player:", error);
       alert("Failed to save the sale. Please check the server connection.");
+      setIsSelling(false);
+      setJustSoldToTeam(null);
     }
   };
 
@@ -119,18 +122,22 @@ export const AuctionProvider = ({ children }) => {
   
   const handleResetAuction = async () => {
     if (!window.confirm("Are you sure you want to reset the entire auction? All progress will be lost permanently.")) return;
+    
+    setIsResetting(true);
     try {
       const response = await fetch('http://localhost:8000/api/auction/reset', { method: 'POST' });
       if (!response.ok) throw new Error('Failed to reset auction on the server');
-      window.location.reload();
+      window.location.reload(); // Reload the page to reflect changes
     } catch (error) {
       console.error("Error resetting auction:", error);
       alert("Failed to reset auction. Please check the server.");
+      setIsResetting(false); // Hide loading indicator on error
     }
   };
 
   const value = {
-    players, teams, loading, currentPlayerIndex, currentBid, lastBidder, auctionFinished,
+    players, teams, loading, isSelling, isResetting, justSoldToTeam,
+    currentPlayerIndex, currentBid, lastBidder, auctionFinished,
     handleBid, handleUndo, handleSold, handleNextPlayer, handlePrevPlayer, handleResetAuction
   };
 
