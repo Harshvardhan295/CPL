@@ -3,42 +3,60 @@ import './PlayerCard.css';
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { GrRevert } from "react-icons/gr";
 import defaultPlayerIcon from '../assets/default-player.jpg';
+import { useAuction } from '../context/AuctionContext.jsx';
 
 const formatCurrency = (amount) => {
-  if (amount >= 10000000) {
-    return `${(amount / 10000000).toFixed(2)}\u00A0Cr`;
-  }
+  if (amount >= 10000000) return `${(amount / 10000000).toFixed(2)}\u00A0Cr`;
   return `${(amount / 100000).toFixed(1)}\u00A0L`;
 };
 
-const PlayerCard = ({ player, currentBid, onUndo, onSold, onNext, onPrev }) => {
+const PlayerCard = () => {
+  const { players, currentPlayerIndex, currentBid, lastBidder, teams, handleUndo, handleSold, handleNextPlayer, handlePrevPlayer } = useAuction();
+  const player = players[currentPlayerIndex];
+
+  let themeTeam = null;
+  if (player?.isSold && player.soldToTeam) {
+    themeTeam = teams[player.soldToTeam];
+  } else if (lastBidder) {
+    themeTeam = teams[lastBidder];
+  }
+
+  const cardStyle = {
+    borderColor: themeTeam ? themeTeam.color : 'rgba(255, 255, 255, 0.2)',
+    boxShadow: themeTeam ? `0 0 35px 10px ${themeTeam.color}80` : 'none',
+    transition: 'all 0.4s ease-in-out',
+  };
+
   if (!player) {
-    return (
-      <div className="text-5xl text-white h-[400px] w-[900px] bg-black/30 backdrop-blur-lg border border-white/20 rounded-xl p-5 flex items-center justify-center">
-        Loading Player...
-      </div>
-    );
+    return <div>Loading Player...</div>;
   }
 
   return (
-    <div className="text-white h-[400px] w-full max-w-4xl 
-      bg-black/30 backdrop-blur-lg 
-      border border-white/20 rounded-2xl 
-      shadow-2xl p-8
-      flex items-center justify-between space-x-8">
+    <div 
+      className="relative text-white h-[400px] w-full max-w-4xl bg-black/30 backdrop-blur-lg border-4 rounded-2xl p-8 flex items-center justify-between space-x-8"
+      style={cardStyle}
+    >
+      {themeTeam && (
+        <div
+          style={{ 
+            backgroundImage: `url(${themeTeam.logo})`,
+            backgroundSize: '150%',
+          }}
+          className="absolute inset-0 bg-center opacity-20 blur-lg z-[-1] rounded-xl"
+        ></div>
+      )}
 
-      {/* Backward Button */}
-      <button onClick={onPrev} className="p-4 rounded-full bg-white/10 hover:bg-white/20 transition duration-200">
+      <button onClick={handlePrevPlayer} className="p-4 rounded-full bg-white/10 hover:bg-white/20 transition duration-200">
         <SlArrowLeft size={28} />
       </button>
-
-      {/* Main Content */}
+      
       <div className="flex items-center space-x-8 flex-grow">
         <div className="flex-shrink-0">
           <img 
-            src={player.imageUrl || defaultPlayerIcon} 
+            src={player.img || defaultPlayerIcon} 
             alt={player.name}
-            className="w-56 h-56 rounded-full object-cover border-4 border-cyan-400 shadow-lg"
+            className="w-56 h-56 rounded-full object-cover border-4 shadow-lg transition-all duration-300"
+            style={{ borderColor: themeTeam ? themeTeam.color : '#06b6d4' }}
             onError={(e) => { e.target.onerror = null; e.target.src = defaultPlayerIcon; }}
           />
         </div>
@@ -46,30 +64,23 @@ const PlayerCard = ({ player, currentBid, onUndo, onSold, onNext, onPrev }) => {
           <div>
             <div className="text-6xl font-bold font-custom tracking-wider">{player.name}</div>
             <div className="text-2xl mt-4 space-y-2 text-gray-300">
-              <p><strong>Priority:</strong> {player.priority}</p>
-              <p className="flex items-center"><strong>Performance:</strong> <span className="text-yellow-400 text-3xl ml-2">{player.performance}</span></p>
+              <p><strong>Role:</strong> {player.role}</p>
+              <p className="flex items-center"><strong>Rating:</strong> <span className="text-yellow-400 text-3xl ml-2">{player.rating}</span></p>
             </div>
           </div>
           <div className='font-custom flex items-center justify-start space-x-4 mt-6'>
-            <div className="text-4xl border-2 border-gray-500 text-white px-6 py-2 rounded-full tracking-widest">
-              {formatCurrency(currentBid)}
-            </div>
-            <button 
-              onClick={onSold}
-              className="text-3xl bg-green-600 text-white px-6 py-3 rounded-full tracking-widest hover:bg-green-500 transition duration-200 font-bold">
-              SOLD
-            </button>
-            <button 
-              onClick={onUndo}
-              className="p-4 rounded-full bg-white/10 hover:bg-white/20 transition duration-200">
-              <GrRevert size={24}/>
-            </button>
+            <div className="text-4xl border-2 border-gray-500 text-white px-6 py-2 rounded-full tracking-widest">{formatCurrency(currentBid)}</div>
+            {player.isSold ? (
+              <button disabled className="text-3xl bg-red-600 text-white px-6 py-3 rounded-full tracking-widest font-bold cursor-not-allowed opacity-70">SOLD</button>
+            ) : (
+              <button onClick={handleSold} disabled={!lastBidder} className="text-3xl bg-green-600 text-white px-6 py-3 rounded-full tracking-widest hover:bg-green-500 transition duration-200 font-bold disabled:bg-gray-500 disabled:cursor-not-allowed disabled:opacity-50">SELL</button>
+            )}
+            <button onClick={handleUndo} disabled={player.isSold} className="p-4 rounded-full bg-white/10 hover:bg-white/20 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"><GrRevert size={24}/></button>
           </div>
         </div>
       </div>
 
-      {/* Forward Button */}
-      <button onClick={onNext} className="p-4 rounded-full bg-white/10 hover:bg-white/20 transition duration-200">
+      <button onClick={handleNextPlayer} className="p-4 rounded-full bg-white/10 hover:bg-white/20 transition duration-200">
         <SlArrowRight size={28} />
       </button>
     </div>
