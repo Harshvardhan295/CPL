@@ -65,61 +65,44 @@ const RulesList = ({ rules, className = '' }) => {
 
 
 // --- Example Data for the Rules ---
-const rulesData = [
-  {
-    imageSrc: 'https://placehold.co/200x200/3498db/ffffff?text=Rule+1',
-    title: '1. Team Purse & Budget',
-    body: 'Each franchise will begin the auction with a total purse of ₹1 Crore. All player purchases will be deducted from this amount. Franchises cannot spend more than their allotted purse under any circumstances.',
-  },
-  {
-    imageSrc: 'https://placehold.co/200x200/e74c3c/ffffff?text=Rule+2',
-    title: '2. Bidding Increments',
-    body: 'The base price for every player is ₹1 Lakh. Bidding proceeds in structured increments: ₹0.5 Lakh (up to ₹3 Lakh), ₹1 Lakh (up to ₹8 Lakh), and ₹2 Lakh (up to the ₹1 Crore ceiling).',
-  },
-  {
-    imageSrc: 'https://placehold.co/200x200/2ecc71/ffffff?text=Rule+3',
-    title: '3. Finalizing a Sale',
-    body: 'When the auctioneer finds no further bids, the "SOLD" button finalizes the sale. The player is sold to the highest bidder, and the amount is deducted from their team\'s purse.',
-  },
-  {
-    imageSrc: 'https://placehold.co/200x200/f1c40f/ffffff?text=Rule+4',
-    title: '4. Undo a Bid',
-    body: 'The "Undo" button can be used to reverse the most recent bid in case of an error. This action reverts the bid amount and the last bidder to their previous state, restoring the purse.',
-  },
-  {
-    imageSrc: 'https://placehold.co/200x200/9b59b6/ffffff?text=Rule+5',
-    title: '5. Player Roster',
-    body: 'Each team must acquire a minimum of 8 players and a maximum of 11 players. The auction will conclude once all players have been presented or all teams have filled their rosters.',
-  },
-  {
-    imageSrc: 'https://placehold.co/200x200/e67e22/ffffff?text=Rule+6',
-    title: '6. Viewing Team Details',
-    body: 'Right-clicking on any team\'s icon will open a pop-up window displaying the list of players bought by that team and their remaining purse balance for quick reference.',
-  },
-];
-
-
 const Rules = () => {
-  return (
-    <div className="bg-black text-white min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 
-            className="text-4xl sm:text-5xl font-extrabold text-cyan-400"
-            style={{ textShadow: '0 0 15px rgba(0, 255, 255, 0.7)' }}
-          >
-            Auction Rules & Regulations
-          </h1>
-          <p className="mt-4 text-lg text-gray-300">
-            Official rules for the Campus Premier League Auction
-          </p>
-        </div>
+    const rulesData = [
+      { imageSrc: 'https://placehold.co/200x200/3498db/ffffff?text=1', title: 'Team Purse & Budget', body: 'Each franchise starts with a purse of ₹1 Crore and cannot exceed this budget.' },
+      { imageSrc: 'https://placehold.co/200x200/e74c3c/ffffff?text=2', title: 'Bidding Increments', body: 'Bids rise in three bands: increments of ₹0.5L, ₹1L, and ₹2L.' },
+      { imageSrc: 'https://placehold.co/200x200/2ecc71/ffffff?text=3', title: 'Finalizing a Sale', body: 'The "SOLD" button finalizes the sale to the highest bidder.' },
+      { imageSrc: 'https://placehold.co/200x200/f1c40f/ffffff?text=4', title: 'Undo a Bid', body: 'The "Undo" button reverses the most recent bid in case of an error.' },
+      { imageSrc: 'https://placehold.co/200x200/9b59b6/ffffff?text=5', title: 'Player Roster', body: 'Teams must acquire a minimum of 8 and a maximum of 11 players.' },
+      { imageSrc: 'https://placehold.co/200x200/e67e22/ffffff?text=6', title: 'Viewing Team Details', body: 'Right-click a team icon to see their roster and remaining purse.' },
+    ];
 
-        <RulesList rules={rulesData} />
-        
-      </div>
-    </div>
-  );
+    return (
+        <div className="bg-black text-white min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-16">
+                <p className="text-cyan-400 font-semibold tracking-widest">CPL 2025</p>
+                    <h1 className="text-4xl sm:text-6xl font-extrabold tracking-wider uppercase" style={{fontFamily: "'AtlantaCollegeRegular', sans-serif"}}>
+                        Match Rules
+                    </h1>
+                    <div className="w-24 h-1 bg-cyan-400 mx-auto mt-4 rounded-full"></div>
+                    <p className="mt-4 text-lg text-gray-400">The official regulations for the Campus Premier League.</p>
+                </div>
+                <div className="space-y-12">
+                    {rulesData.map((rule, index) => {
+                        const isOdd = index % 2 === 0;
+                        return (
+                            <div key={index} className={`group flex flex-col md:flex-row items-center gap-8 p-6 bg-gray-900/50 border border-gray-800 rounded-2xl shadow-lg transition-all duration-300 hover:border-cyan-500/50 hover:shadow-cyan-500/10 ${isOdd ? '' : 'md:flex-row-reverse'}`}>
+                                <img src={rule.imageSrc} alt={rule.title} className="w-40 h-40 rounded-full object-cover border-4 border-gray-700 transition-transform duration-300 group-hover:scale-110 group-hover:border-cyan-400" />
+                                <div className={`text-center ${isOdd ? 'md:text-left' : 'md:text-right'}`}>
+                                    <h3 className="text-3xl font-bold text-white mb-3">{rule.title}</h3>
+                                    <p className="text-gray-400 text-lg">{rule.body}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Rules;
