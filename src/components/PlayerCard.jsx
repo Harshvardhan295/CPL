@@ -1,9 +1,31 @@
 import React from 'react';
 import './PlayerCard.css';
-import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
-import { GrRevert } from "react-icons/gr";
+// Note: react-icons imports are removed and replaced with inline SVGs below
+// import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+// import { GrRevert } from "react-icons/gr";
 import defaultPlayerIcon from '../assets/default-player.png';
 import { useAuction } from '../context/AuctionContext.jsx';
+
+// --- Helper Components for Icons ---
+
+const SlArrowLeft = ({ size = 28 }) => (
+  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 1024 1024" height={size} width={size} xmlns="http://www.w3.org/2000/svg">
+    <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8c-16.4 12.8-16.4 37.5 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+  </svg>
+);
+
+const SlArrowRight = ({ size = 28 }) => (
+  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 1024 1024" height={size} width={size} xmlns="http://www.w3.org/2000/svg">
+    <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path>
+  </svg>
+);
+
+const GrRevert = ({ size = 24 }) => (
+    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height={size} width={size} xmlns="http://www.w3.org/2000/svg">
+        <path fill="none" stroke="#FFF" strokeWidth="2" d="M8,3 L3,8 L8,13 M19,21 C19,15.4771525 14.5228475,11 9,11 L3,11"></path>
+    </svg>
+);
+
 
 const formatCurrency = (amount) => {
   if (amount >= 10000000) return `${(amount / 10000000).toFixed(2)}\u00A0Cr`;
@@ -30,6 +52,10 @@ const PlayerCard = () => {
   if (!player) {
     return <div>Loading Player...</div>;
   }
+  
+  // Vite handles resolving paths from the /src directory when structured this way.
+  // This avoids using `import.meta.url` which may not be supported in all build targets.
+  const getPlayerImageUrl = (imagePath) => `/src/data/${imagePath}`;
 
   return (
     <div
@@ -53,7 +79,7 @@ const PlayerCard = () => {
       <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 flex-grow">
         <div className="flex-shrink-0">
           <img
-            src={player.img || defaultPlayerIcon}
+            src={player.img ? getPlayerImageUrl(player.img) : defaultPlayerIcon}
             alt={player.name}
             className="w-32 h-32 md:w-56 md:h-56 rounded-full object-cover border-4 shadow-lg transition-all duration-300"
             style={{ borderColor: themeTeam ? themeTeam.color : '#06b6d4' }}
